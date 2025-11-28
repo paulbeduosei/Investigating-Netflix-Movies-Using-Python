@@ -1,0 +1,18 @@
+# Importing pandas and matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read in the Netflix CSV as a DataFrame
+netflix_df = pd.read_csv("netflix_data.csv")
+
+# Filter movies released in the 1990s
+movies_90s =netflix_df[(netflix_df['release_year'] >= 1990) & (netflix_df['release_year'] < 2000)]
+
+# 1. Find the most frequent duration in the 1990s
+duration = int(movies_90s['duration'].mode().iloc[0])
+
+# 2. Count the number of short action movies in the 1990s
+short_movie_count = len(movies_90s[(movies_90s['duration'] < 90) & (movies_90s['genre'].str.contains('Action', case=False, na=False))])
+
+print("Most frequent duration in the 1990s:", duration)
+print("Short action movies in the 1990s:", short_movie_count)
